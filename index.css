@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fafbfc;
+    color: #222;
+}
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 32px 24px 24px 24px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.headshot {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 24px;
+    border: 2px solid #eee;
+    object-position: 50% 100%;
+}
+.name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.navBar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.navBar a {
+    text-decoration: none;
+    color: #3366cc;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+.header[style*='justify-content:space-between;'],
+.header.justify-space-between {
+    justify-content: space-between;
+}
+.homeIcon {
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.aboutBlock, .interestsBlock {
+    background: #f6f8fa;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.blockTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}

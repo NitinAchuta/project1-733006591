@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fafbfc;
+    color: #222;
+}
+.service-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 32px 24px 24px 24px;
+}
+.service-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+.service-header-left {
+    display: flex;
+    align-items: center;
+}
+.service-headshot {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.service-name {
+    margin-left: 24px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.service-homeIcon {
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+.service-navBar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.service-navBar a {
+    text-decoration: none;
+    color: #3366cc;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+.service-block {
+    background: #f6f8fa;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.service-blockTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
