@@ -25,21 +25,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Set button text after style is set
     if (mainStyle.disabled) {
-        btn.textContent = 'Default Style';
+        btn.textContent = 'Switch to Swag Style';
     } else {
-        btn.textContent = 'Switch Styles';
+        btn.textContent = 'Switch to Boring Style';
     }
 
     btn.addEventListener('click', function() {
         if (mainStyle.disabled) {
             mainStyle.disabled = false;
             altStyle.disabled = true;
-            btn.textContent = 'Switch Styles';
+            btn.textContent = 'Switch to Boring Style';
             localStorage.setItem('site-style', 'main');
         } else {
             mainStyle.disabled = true;
             altStyle.disabled = false;
-            btn.textContent = 'Default Style';
+            btn.textContent = 'Switch to Swag Style';
             localStorage.setItem('site-style', 'alt');
         }
     });
