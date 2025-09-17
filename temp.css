@@ -1,3 +1,4 @@
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -19,8 +20,8 @@ body {
     margin-bottom: 24px;
 }
 .site-headshot {
-    width: 64px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 24px;
@@ -53,7 +54,6 @@ body {
     font-size: 20px;
     padding: 10px 22px;
     border-radius: 8px;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     letter-spacing: 0.5px;
 }
 .site-nav a.active,
