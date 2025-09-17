@@ -20,9 +20,9 @@ body {
     margin-bottom: 24px;
 }
 .site-headshot {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    border-radius: 10%;
     object-fit: cover;
     margin-right: 24px;
     border: 2px solid #eee;
@@ -72,4 +72,10 @@ body {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 8px;
+}
+
+.portfolioImages{
+    height: 30vh;
+    width: 30vw;
+    flex-wrap: wrap;
 }

@@ -31,12 +31,127 @@
             <a href="genai.html" class="active">GenAI</a>
         </nav>
         <main>
-            <section class="site-block">
-                <h2 class="site-blockTitle">GenAI</h2>
-                <p>GenAI content coming soon.</p>
+            <section class="site-block" id="genai-game-section">
+                <h2 class="site-blockTitle">GenAI Dodge Game</h2>
+                <div id="game-container">
+                    <canvas id="dodge-canvas" width="400" height="600"></canvas>
+                    <div id="game-ui">
+                        <p id="score-label">Score: <span id="score">0</span></p>
+                        <p id="highscore-label">High Score: <span id="highscore">0</span></p>
+                        <p id="gameover-label" style="display:none; color:#d32f2f; font-size:2.2rem; font-weight:900; margin:12px 0;">GAME OVER</p>
+                        <button id="restart-btn" style="display:none;">Restart</button>
+                    </div>
+                </div>
             </section>
+                        <section class="site-block">
+                <h2 class="site-blockTitle">Prompt:</h2>
+                <p>
+                    "Using only HTML, CSS and Javscript create a game matching the original styling and color scheme.
+                    The game is simple: the player is a box and random boxes are falling from the sky. The player has to move left and right to dodge the boxes.
+                    If they hit by a box, the game is over "GAME OVER" prints and a restart button shows up at the bottom. The score is tracked based on how many boxes they have dodged.
+                    Make sure to keep a Score and High Score feature where the player can see their score.
+                    This number should be persistent just like the style to ensure it is a true high score."
+                </p>
+            </section>
+            <link rel="stylesheet" href="genai.css">
+            <script>
+                const canvas = document.getElementById('dodge-canvas');
+                const ctx = canvas.getContext('2d');
+                const scoreSpan = document.getElementById('score');
+                const highscoreSpan = document.getElementById('highscore');
+                const restartBtn = document.getElementById('restart-btn');
+                const gameoverLabel = document.getElementById('gameover-label');
+                let score = 0;
+                let highscore = localStorage.getItem('dodgeHighScore') ? parseInt(localStorage.getItem('dodgeHighScore')) : 0;
+                let player = { x: 180, y: 540, w: 40, h: 40, color: '#1f7a8c', speed: 7 };
+                let obstacles = [];
+                let gameOver = false;
+                let animationId;
+                highscoreSpan.textContent = highscore;
+                function drawPlayer() {
+                    ctx.fillStyle = player.color;
+                    ctx.fillRect(player.x, player.y, player.w, player.h);
+                }
+                function drawObstacle(obs) {
+                    ctx.fillStyle = '#ff9800';
+                    ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
+                }
+                function spawnObstacle() {
+                    const w = 40 + Math.random() * 40;
+                    obstacles.push({ x: Math.random() * (canvas.width - w), y: -60, w: w, h: 30, speed: 3 + Math.random() * 3, dodged: false });
+                }
+                function updateObstacles() {
+                    for (let obs of obstacles) {
+                        obs.y += obs.speed;
+                        // If obstacle goes past player and not collided, count as dodged
+                        if (!obs.dodged && obs.y > player.y + player.h) {
+                            obs.dodged = true;
+                            score++;
+                            scoreSpan.textContent = score;
+                        }
+                    }
+                    obstacles = obstacles.filter(obs => obs.y < canvas.height);
+                }
+                function checkCollision() {
+                    for (let obs of obstacles) {
+                        if (
+                            player.x < obs.x + obs.w &&
+                            player.x + player.w > obs.x &&
+                            player.y < obs.y + obs.h &&
+                            player.y + player.h > obs.y
+                        ) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                function draw() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    drawPlayer();
+                    for (let obs of obstacles) drawObstacle(obs);
+                }
+                function gameLoop() {
+                    if (gameOver) return;
+                    draw();
+                    updateObstacles();
+                    if (Math.random() < 0.03) spawnObstacle();
+                    if (checkCollision()) {
+                        gameOver = true;
+                        cancelAnimationFrame(animationId);
+                        restartBtn.style.display = 'inline-block';
+                        gameoverLabel.style.display = 'block';
+                        // Update high score
+                        if (score > highscore) {
+                            highscore = score;
+                            localStorage.setItem('dodgeHighScore', highscore);
+                            highscoreSpan.textContent = highscore;
+                        }
+                        return;
+                    }
+                    animationId = requestAnimationFrame(gameLoop);
+                }
+                function resetGame() {
+                    score = 0;
+                    player.x = 180;
+                    obstacles = [];
+                    gameOver = false;
+                    restartBtn.style.display = 'none';
+                    gameoverLabel.style.display = 'none';
+                    scoreSpan.textContent = score;
+                    animationId = requestAnimationFrame(gameLoop);
+                }
+                document.addEventListener('keydown', function(e) {
+                    if (gameOver) return;
+                    if (e.key === 'ArrowLeft') player.x = Math.max(0, player.x - player.speed);
+                    if (e.key === 'ArrowRight') player.x = Math.min(canvas.width - player.w, player.x + player.speed);
+                });
+                restartBtn.addEventListener('click', resetGame);
+                resetGame();
+            </script>
         </main>
+        
     </div>
+    
     <script src="switchstyle.js"></script>
 </body>
 </html>
